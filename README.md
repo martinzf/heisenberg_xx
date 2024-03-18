@@ -2,7 +2,7 @@
 
 ### ABOUT
 
-WIP: Heisenberg XX model, miscellaneous documentation and calculations. Essentially a rewriting of the cited references in my own words so that they make sense to me, with some supplementary Python code and extra derivations. Intended as a well broken down introduction to the model, without excessive rigour or complicated code &mdash; reader beware, it's still rather dense. More heavy duty calculations on the way.
+WIP: Heisenberg XX model, miscellaneous documentation and calculations. Essentially a rewriting of the cited references in my own words, with some supplementary Python code and extra derivations. Intended as a well broken down introduction to the model, without excessive rigour or complicated code &mdash; the simple code suffers from numerical issues and is not very performant, it is simply illustrative. More heavy duty calculations on the way.
 
 ### HOW TO USE
 
