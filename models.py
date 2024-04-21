@@ -1,7 +1,7 @@
 import numpy as np
 
 # Class for organising different spin chain models
-class HXX_Chain():
+class XX_Chain():
     def __init__(self, N, J, h):
         self.N = N
         self.J = J
@@ -13,10 +13,6 @@ class HXX_Chain():
         for n in range(1, self.N):
             P[n+1] = np.roll(P[n], -1) - self.h[n] * P[n] - self.J[n-1]**2 * P[n-1]
         return P
-    def spec(self):
-        P = self.OPS()
-        E = np.sort(np.roots(P[self.N]))
-        return E
     def corr(self, L, M):
         P = self.OPS()
         E = np.sort(np.roots(P[self.N]))[:M]
@@ -36,3 +32,20 @@ class HXX_Chain():
         else:
             bin_entropy = np.log(nu ** alpha + (1 - nu) ** alpha) / (1 - alpha)
         return np.sum(bin_entropy)
+    
+# Krawtchouk chain
+class Krawtchouk(XX_Chain):
+    def __init__(self, N, q):
+        n = np.arange(N)
+        J = np.sqrt(q * (1 - q) * (n + 1) * (N - n - 1))[:-1]
+        h = q * (N - 1) + (1 - 2*q) * n
+        super().__init__(N, J, h)
+        self.q = q
+
+# Lamé chain
+class Lame(XX_Chain):
+    def __init__(self, N):
+        n = np.arange(N)
+        J = np.sqrt((n + 1) * (N + n -1) * (n + 1/2) * (N - n - 3/2))[:-1]
+        h = np.zeros(N)
+        super().__init__(N, J, h)
