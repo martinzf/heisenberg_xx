@@ -2,7 +2,7 @@
 
 ### ABOUT
 
-Heisenberg XX model, miscellaneous documentation and calculations. Essentially a rewriting of the cited references in my own words, with some supplementary Python code and extra derivations. Intended as a well broken down introduction to the model, without excessive rigour or complicated code &mdash; the simple code suffers from numerical issues and is not very performant, it is simply illustrative. More heavy duty calculations on the way.
+Heisenberg XX model, miscellaneous documentation and calculations. Essentially a rewriting of the cited references in my own words, with some supplementary Python code and extra derivations. Intended as a well broken down introduction to the model, without excessive rigour or complicated code.
 
 ### HOW TO USE
 
@@ -19,12 +19,16 @@ The Python notebooks should now be able to run without a problem.
 ```
 heisenberg_xx
 .
-|-- entropy.ipynb
-|-- intro.ipynb
+|-- tutorials
+|   |-- 1_intro.ipynb
+|   |-- 2_entropy.ipynb
+|   |-- 3_homogeneous.ipynb
+|   |-- 4_inhomogeneous.ipynb
 |-- models.py
 |-- requirements.txt
+|-- utils.py
 ```
-Intended reading order: `intro.ipynb` -> `entropy.ipynb`. The 1st notebook is general, whereas the 2nd contains specific information on entanglement entropy calculations and different models.
+Python tutorial notebooks numbered by intended reading order. Basic theory documentation.
 
 ### BACKGROUND
 
