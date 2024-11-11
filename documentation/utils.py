@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 import numpy as np
 import mpmath as mp
+from scipy.integrate import quad
+from scipy.special import gamma
 from itertools import combinations
 
 
@@ -19,7 +21,7 @@ class OrthPolySyst:
         mp.mp.dps = int(relprec*N)
 
         # Create a list of lambda functions for each polynomial: P(n, x)
-        self._p_coeffs = self._polynomials_coefficients()
+        self._p_coeffs = self._polynomial_coefficients()
         self.polynomials = lambda n, x: mp.polyval(self._p_coeffs[n].tolist(), x)
 
         # Lazy-loaded attributes
@@ -27,7 +29,7 @@ class OrthPolySyst:
         self._normalization = None
         self._weights = None
 
-    def _polynomials_coefficients(self) -> np.ndarray:
+    def _polynomial_coefficients(self) -> np.ndarray:
         """Generates an orthogonal polynomial system using recurrence relations."""
         P = np.empty((self.N + 1, self.N + 1), dtype=object)
         P.fill(mp.mpf(0))
@@ -57,9 +59,9 @@ class OrthPolySyst:
     def normalization(self):
         """Normalization constants of the polynomial system."""
         if self._normalization is None:
-            gamma = mp.ones(self.N+1, 1)
-            gamma[1:] = mp.matrix([mp.fprod(self.a[:i+1]) for i in range(self.N)])
-            self._normalization = gamma
+            g = mp.ones(self.N+1, 1)
+            g[1:] = mp.matrix([mp.fprod(self.a[:i+1]) for i in range(self.N)])
+            self._normalization = g
         return self._normalization
 
     @property
@@ -151,3 +153,22 @@ class SpinChain:
             S = mp.fsum([bin_entropy(alpha, p.real) for p in populations])
             entropy = float(mp.nstr(S.real))
             return entropy
+
+
+def cp_homogeneous(a):
+    """Non-universal constant for homogeneous spin chain."""
+
+    # Integral for a = 1
+    if np.isclose(a, 1):
+        def f1(t):
+            f1 = (.5 * (t / np.tanh(t) - 1) / np.sinh(t) ** 2 - np.exp(-2*t)/6) / t
+            return f1
+        integral = quad(f1, 0, np.inf, epsabs=np.inf)[0]
+    # Integral for a =/= 1
+    else:
+        def fa(t):
+            fa = ((1 / (a*np.sinh(t/a)) - 1 / np.sinh(t)) / ((1-a**-2)*np.sinh(t)) - np.exp(-2*t)/6) / t
+            return fa
+        integral = quad(fa, 0, np.inf, epsabs=np.inf)[0]
+
+    return .5 * (1 + 1/a) * (np.log(2)/3 + integral)

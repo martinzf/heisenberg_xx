@@ -2,7 +2,9 @@
 
 ### ABOUT
 
-Heisenberg XX model, miscellaneous documentation and calculations. Essentially a rewriting of the cited references in my own words, with some supplementary Python code and extra derivations. Intended as a well broken down introduction to the model, without excessive rigour or complicated code.
+Work in progress.
+
+Project on the Heisenberg XX model, miscellaneous documentation and calculations. Essentially a rewriting of the cited references in my own words, with some supplementary Python scripts and derivations. Intended as a well broken down introduction to the model, plus some extra code and calculations for research.
 
 ### HOW TO USE
 
@@ -19,22 +21,22 @@ The Python notebooks should now be able to run without a problem.
 ```
 heisenberg_xx
 .
-|-- tutorials
+|-- documentation
 |   |-- 1_intro.ipynb
 |   |-- 2_entropy.ipynb
 |   |-- 3_homogeneous.ipynb
 |   |-- 4_inhomogeneous.ipynb
+|   |-- utils.py
 |-- models.py
 |-- requirements.txt
-|-- utils.py
 ```
-Python tutorial notebooks numbered by intended reading order. Basic theory documentation.
+Python tutorial notebooks numbered by intended reading order in the `documentation` folder. Background theoretical information and some trial calculations.
 
 ### BACKGROUND
 
-The Heisenberg XX quantum system is a model which studies the spin couplings of particles on a line. These particles interact with their nearest neighbour and with an external magnetic field. Either interaction may be homogeneous or it may depend on the particle site &mdash; however, interactions between neighbouring particles happen on a plane, with coupling strength equal in both directions, and the magnetic field is orthogonal to this interaction. This model allows us to retrieve non-trivial results from complicated spin couplings, without the need for supercomputers. In particular, entanglement entropy can be calculated in a reasonably efficient manner.
+The Heisenberg XX model is a statistical mechanical model which studies the magnetic interactions of particles on a line. These particles interact with their nearest neighbours via spin coupling, and with an external magnetic field. Either interaction may be homogeneous or it may depend on the particle site &mdash; however, interactions between neighbouring particles happen on a plane orthogonal to the magnetic field, with coupling strength equal in both directions. This model allows us to retrieve non-trivial results from complicated spin couplings with low computational cost, as it presents a wealth of analytical and numerical simplifications. In particular, entanglement entropy can be calculated in an efficient manner.
 
-The model is not only interesting from the point of view of magnetism and statistical mechanics, but certain spin chains are closely related to particular Conformal Field Theories (CFTs) through their central charge. Curiously, spin chains in this model can also be shown to be equivalent to families of orthogonal polynomials. Hamiltonians like the Heisenberg XX one (lattices of spin-coupled particles, possibly more complicated than this model) lend themselves to being studied efficiently through quantum annealing.
+The model is not only interesting from the point of view of magnetism and statistical mechanics, but certain regimes of the spin chains are closely related to conformal field theories (CFTs). Curiously, part of the reason why we can perform calculations efficiently is the fact that spin chains in this model can also be shown to be equivalent to families of orthogonal polynomials. 
 
 ### REFERENCES
 
